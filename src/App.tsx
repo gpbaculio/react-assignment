@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Outlet, Route, Routes } from "react-router-dom";
 
 import Login from "./pages/Login";
 import Notes from "./pages/Notes";
@@ -21,7 +21,14 @@ function App() {
       <Header />
       <Routes>
         {!user ? <Route path="/login" element={<Login />} /> : null}
-        <Route element={<AuthState />}>
+        <Route
+          element={
+            <>
+              <AuthState />
+              <Outlet />
+            </>
+          }
+        >
           {["/", "/notes"].map((path) => (
             <Route
               path={path}
