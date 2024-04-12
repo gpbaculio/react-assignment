@@ -1,11 +1,10 @@
 import { useNavigate } from "react-router-dom";
 
-import { useAppDispatch, useAppSelector } from "../hooks";
-import { selectUser, setUser } from "../store/userSlice";
+import { useAppSelector } from "../hooks";
+import { selectUser } from "../store/userSlice";
 
 function AuthState() {
   const user = useAppSelector(selectUser);
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   if (!user) {
@@ -27,17 +26,9 @@ function AuthState() {
   }
 
   return (
-    <p>
-      Welcome {user}!{" "}
-      <button
-        onClick={() => {
-          dispatch(setUser(null));
-          navigate("/");
-        }}
-      >
-        Sign out
-      </button>
-    </p>
+    <div className="flex justify-center items-center mt-5">
+      <p className="text-xl font-semibold">Welcome {user}!</p>
+    </div>
   );
 }
 
