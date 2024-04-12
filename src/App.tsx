@@ -1,7 +1,5 @@
-import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import "./output.css"; // Import the output.css file
 
 function App() {
   return (
