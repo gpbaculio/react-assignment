@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../hooks";
-
 import { selectUser, setUser } from "../store/userSlice";
 
 function AuthState() {
