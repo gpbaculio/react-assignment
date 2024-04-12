@@ -7,14 +7,20 @@ import Header from "./components/Header";
 import AuthState from "./components/AuthState";
 import RequireAuth from "./components/RequireAuth";
 
+import { useAppSelector } from "./hooks";
+
+import { selectUser } from "./store/userSlice";
+
 import "./App.css";
 
 function App() {
+  const user = useAppSelector(selectUser);
+
   return (
     <>
       <Header />
       <Routes>
-        <Route path="/login" element={<Login />} />
+        {!user ? <Route path="/login" element={<Login />} /> : null}
         <Route element={<AuthState />}>
           {["/", "/notes"].map((path) => (
             <Route
