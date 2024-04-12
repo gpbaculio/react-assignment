@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 function Header() {
@@ -18,14 +17,6 @@ function Header() {
                 className="hover:underline text-white hover:text-gray-200"
               >
                 Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/features"
-                className="hover:underline text-white hover:text-gray-200"
-              >
-                Notes
               </Link>
             </li>
           </ul>
