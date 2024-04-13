@@ -4,7 +4,7 @@ import { nanoid } from "nanoid";
 
 import { RootState } from "./index";
 
-interface Note {
+export interface Note {
   id: string;
   title: string;
   description: string;
