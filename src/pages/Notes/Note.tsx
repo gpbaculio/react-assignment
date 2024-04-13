@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
 import { Note as NoteType } from "../../store/notesSlice";
 
 interface NoteProps {
