@@ -1,25 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Outlet, Route, Routes } from "react-router-dom";
+
+import Login from "./pages/Login";
+import Notes from "./pages/Notes";
+
+import Header from "./components/Header";
+import AuthState from "./components/AuthState";
+import RequireAuth from "./components/RequireAuth";
+
+import { useAppSelector } from "./hooks";
+
+import { selectUser } from "./store/userSlice";
+
+import "./App.css";
 
 function App() {
+  const user = useAppSelector(selectUser);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <>
+      <Header />
+      <Routes>
+        {!user ? <Route path="/login" element={<Login />} /> : null}
+        <Route
+          element={
+            <>
+              <AuthState />
+              <Outlet />
+            </>
+          }
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <Route path="/" element={<Notes />} /> {/*handled by AuthState */}
+          <Route
+            path="/notes"
+            element={
+              // protected route
+              <RequireAuth>
+                <Notes />
+              </RequireAuth>
+            }
+          />
+        </Route>
+      </Routes>
+    </>
   );
 }
 
