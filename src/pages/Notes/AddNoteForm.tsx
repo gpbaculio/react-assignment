@@ -1,14 +1,20 @@
 import React, { useState, useRef } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { addNote } from "../../store/notesSlice";
+import { selectUser } from "../../store/userSlice";
+
 interface NoteFormInput {
   title: string;
   description: string;
 }
 
 const AddNoteForm = () => {
+  const user = useAppSelector(selectUser);
   const [isOpen, setIsOpen] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
+  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
@@ -17,8 +23,12 @@ const AddNoteForm = () => {
   } = useForm<NoteFormInput>();
 
   const onSubmit: SubmitHandler<NoteFormInput> = (data) => {
-    reset();
-    setIsOpen(false);
+    if (data.title && data.description && user) {
+      dispatch(addNote(data.title, data.description, user));
+      alert("Note added successfully!");
+      reset();
+      setIsOpen(false);
+    }
   };
 
   const openModal = () => setIsOpen(true);
@@ -79,13 +89,14 @@ const AddNoteForm = () => {
                   {errors.description.message}
                 </span>
               )}
-
-              <button
-                type="submit"
-                className="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              >
-                Submit
-              </button>
+              <div>
+                <button
+                  type="submit"
+                  className="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                >
+                  Submit
+                </button>
+              </div>
             </form>
           </div>
         </div>

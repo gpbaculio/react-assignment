@@ -8,6 +8,7 @@ interface Note {
   id: string;
   title: string;
   description: string;
+  owner: string;
   createdAt: string;
 }
 
@@ -27,11 +28,12 @@ const notesSlice = createSlice({
       reducer: (state, action: PayloadAction<Note>) => {
         state.notes.push(action.payload);
       },
-      prepare: (title: string, description: string) => ({
+      prepare: (title: string, description: string, owner: string) => ({
         payload: {
           id: nanoid(),
           title,
           description,
+          owner,
           createdAt: new Date().toISOString(),
         },
       }),
@@ -42,6 +44,7 @@ const notesSlice = createSlice({
         id: string;
         title?: string;
         description?: string;
+        owner?: string;
       }>
     ) => {
       const { id, title, description } = action.payload;
@@ -57,7 +60,7 @@ const notesSlice = createSlice({
   },
 });
 
-export const { addNote, deleteNote } = notesSlice.actions;
+export const { addNote, deleteNote, editNote } = notesSlice.actions;
 
 export const selectNotes = (state: RootState) => state.notes.notes;
 
