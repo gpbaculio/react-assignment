@@ -25,7 +25,7 @@ const AddNoteForm = () => {
   const onSubmit: SubmitHandler<NoteFormInput> = (data) => {
     if (data.title && data.description && user) {
       dispatch(addNote(data.title, data.description, user));
-      alert("Note added successfully!");
+      window.alert("Note added successfully!");
       reset();
       setIsOpen(false);
     }
