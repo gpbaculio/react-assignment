@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 
-import { useAppSelector } from "../hooks";
-import { selectUser } from "../store/userSlice";
+import { useAppDispatch, useAppSelector } from "../hooks";
+import { selectUser, setUser } from "../store/userSlice";
 
 function Header() {
   const user = useAppSelector(selectUser);
+  const dispatch = useAppDispatch();
 
   return (
     <header className="bg-blue-500 text-white p-4">
@@ -36,7 +37,9 @@ function Header() {
             ) : (
               <li>
                 <button
-                  // onClick={logout}
+                  onClick={() => {
+                    dispatch(setUser(null));
+                  }}
                   className="text-white hover:text-gray-200 focus:outline-none"
                 >
                   Logout
