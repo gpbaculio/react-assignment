@@ -26,8 +26,9 @@ function AuthState() {
   }
 
   return (
-    <div className="flex justify-center items-center mt-5">
-      <p className="text-xl font-semibold">Welcome {user}!</p>
+    <div className="flex justify-center items-center mt-5 flex-row">
+      <p className="text-xl font-normal">Welcome</p>
+      <p className="text-xl font-bold">&nbsp;{user}!</p>
     </div>
   );
 }
