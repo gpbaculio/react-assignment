@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import { editNote, Note as NoteType } from "../../store/notesSlice";
+import { deleteNote, editNote, Note as NoteType } from "../../store/notesSlice";
 import { useAppDispatch } from "../../hooks";
 
 interface NoteProps {
@@ -64,6 +64,12 @@ function Note({ note }: NoteProps) {
     setIsEditing(false);
   };
 
+  const handleDelete = () => {
+    if (window.confirm("Are you sure you want to delete this note?")) {
+      dispatch(deleteNote(note.id));
+    }
+  };
+
   return (
     <div className="bg-white border shadow-md p-4 rounded-lg flex flex-col">
       {isEditing ? (
@@ -116,7 +122,7 @@ function Note({ note }: NoteProps) {
               Edit
             </button>
             <button
-              //   onClick={() => onDeleteNote(note.id)}
+              onClick={() => handleDelete()}
               className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
             >
               Delete
