@@ -44,7 +44,6 @@ const notesSlice = createSlice({
         id: string;
         title?: string;
         description?: string;
-        owner?: string;
       }>
     ) => {
       const { id, title, description } = action.payload;

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
-import { Note as NoteType } from "../../store/notesSlice";
+import { editNote, Note as NoteType } from "../../store/notesSlice";
+import { useAppDispatch } from "../../hooks";
 
 interface NoteProps {
   note: NoteType;
@@ -26,6 +27,7 @@ const formatDate = (dateString: string) => {
 };
 
 function Note({ note }: NoteProps) {
+  const dispatch = useAppDispatch();
   const titleInputRef = useRef<HTMLInputElement>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(note.title);
@@ -51,10 +53,14 @@ function Note({ note }: NoteProps) {
   };
 
   const handleSave = () => {
-    // onUpdateNote(note.id, {
-    //   title: editedTitle,
-    //   description: editedDescription,
-    // });
+    dispatch(
+      editNote({
+        id: note.id,
+        title: editedTitle,
+        description: editedDescription,
+      })
+    );
+    alert("Note updated successfully!");
     setIsEditing(false);
   };
 
