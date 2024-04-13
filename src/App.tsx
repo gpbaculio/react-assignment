@@ -29,16 +29,16 @@ function App() {
             </>
           }
         >
-          {["/", "/notes"].map((path) => (
-            <Route
-              path={path}
-              element={
-                <RequireAuth>
-                  <Notes />
-                </RequireAuth>
-              }
-            />
-          ))}
+          <Route path="/" element={<Notes />} /> {/*handled by AuthState */}
+          <Route
+            path="/notes"
+            element={
+              // protected route
+              <RequireAuth>
+                <Notes />
+              </RequireAuth>
+            }
+          />
         </Route>
       </Routes>
     </>
